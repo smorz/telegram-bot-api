@@ -582,6 +582,10 @@ func (e MessageEntity) IsTextLink() bool {
 type PhotoSize struct {
 	// FileID identifier for this file, which can be used to download or reuse the file
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// Width photo width
 	Width int `json:"width"`
 	// Height photo height
@@ -596,6 +600,10 @@ type PhotoSize struct {
 type Audio struct {
 	// FileID is an identifier for this file, which can be used to download or reuse the file
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// Duration of the audio in seconds as defined by sender
 	Duration int `json:"duration"`
 	// Performer of the audio as defined by sender or by audio tags
@@ -620,6 +628,10 @@ type Audio struct {
 type Document struct {
 	// FileID is a identifier for this file, which can be used to download or reuse the file
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// Thumbnail document thumbnail as defined by sender
 	//
 	// optional
@@ -640,12 +652,12 @@ type Document struct {
 
 // Sticker contains information about a sticker.
 type Sticker struct {
+	// FileID is an identifier for this file, which can be used to download or reuse the file
+	FileID string `json:"file_id"`
 	// FileUniqueID is an unique identifier for this file,
 	// which is supposed to be the same over time and for different bots.
 	// Can't be used to download or reuse the file.
 	FileUniqueID string `json:"file_unique_id"`
-	// FileID is an identifier for this file, which can be used to download or reuse the file
-	FileID string `json:"file_id"`
 	// Width sticker width
 	Width int `json:"width"`
 	// Height sticker height
@@ -690,6 +702,10 @@ type StickerSet struct {
 type ChatAnimation struct {
 	// FileID odentifier for this file, which can be used to download or reuse the file
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// Width video width as defined by sender
 	Width int `json:"width"`
 	// Height video height as defined by sender
@@ -760,6 +776,10 @@ type VideoNote struct {
 type Voice struct {
 	// FileID identifier for this file, which can be used to download or reuse the file
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// Duration of the audio in seconds as defined by sender
 	Duration int `json:"duration"`
 	// MimeType of the file as defined by sender
@@ -824,6 +844,10 @@ type UserProfilePhotos struct {
 type File struct {
 	// FileID identifier for this file, which can be used to download or reuse the file
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// FileSize file size, if known
 	//
 	// optional
@@ -1158,6 +1182,10 @@ type Game struct {
 type Animation struct {
 	// FileID identifier for this file, which can be used to download or reuse the file.
 	FileID string `json:"file_id"`
+	// FileUniqueID is an unique identifier for this file,
+	// which is supposed to be the same over time and for different bots.
+	// Can't be used to download or reuse the file.
+	FileUniqueID string `json:"file_unique_id"`
 	// Thumb animation thumbnail as defined by sender.
 	//
 	// optional
