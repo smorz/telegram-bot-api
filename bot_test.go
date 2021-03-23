@@ -1,6 +1,8 @@
 package tgbotapi_test
 
 import (
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -752,4 +754,56 @@ func TestUnpinChatMessage(t *testing.T) {
 		t.Error(err)
 		t.Fail()
 	}
+}
+
+func TestFindUser(t *testing.T) {
+	updates := []tgbotapi.Update{
+		{
+			Message: &tgbotapi.Message{
+				From: &tgbotapi.User{
+					ID:           ChatID,
+					FirstName:    "abcd",
+					LastName:     "efg",
+					UserName:     "hijk",
+					LanguageCode: "lm",
+					IsBot:        false,
+				},
+			},
+		},
+		{
+			UpdateID:         0,
+			ChannelPost:      &tgbotapi.Message{From: &tgbotapi.User{ID: ChatID, FirstName: "abcd", LastName: "efg", UserName: "hijk", LanguageCode: "lm", IsBot: false}},
+			ShippingQuery:    &tgbotapi.ShippingQuery{},
+			PreCheckoutQuery: &tgbotapi.PreCheckoutQuery{},
+		},
+		{
+			UpdateID:      0,
+			Message:       &tgbotapi.Message{},
+			EditedMessage: &tgbotapi.Message{},
+			ChannelPost:   &tgbotapi.Message{},
+			EditedChannelPost: &tgbotapi.Message{
+				MessageID: ReplyToMessageID,
+				From: &tgbotapi.User{
+					ID:           ChatID,
+					FirstName:    "abcd",
+					LastName:     "efg",
+					UserName:     "hijk",
+					LanguageCode: "lm",
+					IsBot:        false},
+				PassportData: &tgbotapi.PassportData{},
+			},
+			PreCheckoutQuery: &tgbotapi.PreCheckoutQuery{},
+		},
+	}
+	for i, update := range updates {
+		user := update.FindeUser()
+		if user.String() != "hijk" {
+			t.Error(errors.New("user not found"))
+			t.Fail()
+
+		} else {
+			fmt.Println(">>>>>>>>>>> Passed Index", i)
+		}
+	}
+
 }

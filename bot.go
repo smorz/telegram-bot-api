@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -1092,4 +1093,29 @@ func EscapeText(parseMode string, text string) string {
 	}
 
 	return replacer.Replace(text)
+}
+
+func (update *Update) FindeUser() *User {
+	return findeUser(*update)
+}
+
+func findeUser(i interface{}) *User {
+	u := reflect.ValueOf(i)
+	for i := 0; i < u.NumField(); i++ {
+		key := u.Type().Field(i).Name
+		if key == "From" || key == "User" {
+			return u.Field(i).Interface().(*User)
+		}
+	}
+	for i := 0; i < u.NumField(); i++ {
+		if u.Field(i).Kind() == reflect.Ptr {
+			if !u.Field(i).IsNil() {
+				f := reflect.Indirect(u.Field(i))
+				if user := findeUser(f.Interface()); user != nil {
+					return user
+				}
+			}
+		}
+	}
+	return nil
 }
