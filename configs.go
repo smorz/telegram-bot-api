@@ -65,11 +65,11 @@ type Fileable interface {
 
 // BaseChat is base type for all chat config types.
 type BaseChat struct {
-	ChatID              int64 // required
-	ChannelUsername     string
-	ReplyToMessageID    int
-	ReplyMarkup         interface{}
-	DisableNotification bool
+	ChatID              int64       `json:"chat_id"` // required
+	ChannelUsername     string      `json:"channel_username"`
+	ReplyToMessageID    int         `json:"reply_to_message_id"`
+	ReplyMarkup         interface{} `json:"reply_markup"`
+	DisableNotification bool        `json:"disable_notification"`
 }
 
 func (chat *BaseChat) params() (Params, error) {
@@ -204,9 +204,9 @@ func (edit BaseEdit) values() (url.Values, error) {
 // MessageConfig contains information about a SendMessage request.
 type MessageConfig struct {
 	BaseChat
-	Text                  string
-	ParseMode             string
-	DisableWebPagePreview bool
+	Text                  string `json:"text"`
+	ParseMode             string `json:"parse_mode"`
+	DisableWebPagePreview bool   `json:"disable_web_page_preview"`
 }
 
 // values returns a url.Values representation of MessageConfig.
