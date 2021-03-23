@@ -2,7 +2,9 @@ package tgbotapi
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
+	"net/http"
 	"net/url"
 	"strconv"
 )
@@ -1365,10 +1367,17 @@ func (config DiceConfig) method() string {
 	return "sendDice"
 }
 
-func Json(c Chattable) ([]byte, error) {
-	j, err := json.Marshal(c)
-	if err != nil {
-		return nil, err
+func Answer(w http.ResponseWriter, c Chattable) error {
+	switch c.(type) {
+	case Fileable:
+		return errors.New("There is no time to upload a file in response to the request!")
+	default:
+		j, err := json.Marshal(c)
+		if err != nil {
+			return err
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(append(j[:len(j)-1], []byte(`,"method":"`+c.method()+`"}`)...))
+		return nil
 	}
-	return append(j[:len(j)-1], []byte(`,"method":"`+c.method()+`"}`)...), nil
 }
