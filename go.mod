@@ -1,4 +1,4 @@
-module github.com/smorz/telegram-bot-api/v5
+module github.com/smorz/telegram-bot-api
 
 go 1.14
 

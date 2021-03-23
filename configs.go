@@ -1364,3 +1364,11 @@ func (config DiceConfig) values() (url.Values, error) {
 func (config DiceConfig) method() string {
 	return "sendDice"
 }
+
+func Json(c Chattable) ([]byte, error) {
+	j, err := json.Marshal(c)
+	if err != nil {
+		return nil, err
+	}
+	return append(j[:len(j)-1], []byte(`,"method":"`+c.method()+`"}`)...), nil
+}
