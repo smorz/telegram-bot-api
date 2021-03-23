@@ -206,9 +206,9 @@ func (edit BaseEdit) values() (url.Values, error) {
 // MessageConfig contains information about a SendMessage request.
 type MessageConfig struct {
 	BaseChat
-	Text                  string `json:"text"`
-	ParseMode             string `json:"parse_mode"`
-	DisableWebPagePreview bool   `json:"disable_web_page_preview"`
+	Text                  string `json:"text,omitempty"`
+	ParseMode             string `json:"parse_mode,omitempty"`
+	DisableWebPagePreview bool   `json:"disable_web_page_preview,omitempty"`
 }
 
 // values returns a url.Values representation of MessageConfig.
@@ -234,9 +234,9 @@ func (config MessageConfig) method() string {
 // ForwardConfig contains information about a ForwardMessage request.
 type ForwardConfig struct {
 	BaseChat
-	FromChatID          int64 // required
-	FromChannelUsername string
-	MessageID           int // required
+	FromChatID          int64  `json:"from_chat_id,omitempty"` // required
+	FromChannelUsername string `json:"from_channel_username,omitempty"`
+	MessageID           int    `json:"message_id,omitempty"` // required
 }
 
 // values returns a url.Values representation of ForwardConfig.
@@ -258,8 +258,8 @@ func (config ForwardConfig) method() string {
 // PhotoConfig contains information about a SendPhoto request.
 type PhotoConfig struct {
 	BaseFile
-	Caption   string
-	ParseMode string
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
 }
 
 // Params returns a map[string]string representation of PhotoConfig.
@@ -307,11 +307,11 @@ func (config PhotoConfig) method() string {
 // AudioConfig contains information about a SendAudio request.
 type AudioConfig struct {
 	BaseFile
-	Caption   string
-	ParseMode string
-	Duration  int
-	Performer string
-	Title     string
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
+	Duration  int    `json:"duration,omitempty"`
+	Performer string `json:"performer,omitempty"`
+	Title     string `json:"title,omitempty"`
 }
 
 // values returns a url.Values representation of AudioConfig.
@@ -379,8 +379,8 @@ func (config AudioConfig) method() string {
 // DocumentConfig contains information about a SendDocument request.
 type DocumentConfig struct {
 	BaseFile
-	Caption   string
-	ParseMode string
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
 }
 
 // values returns a url.Values representation of DocumentConfig.
@@ -462,9 +462,9 @@ func (config StickerConfig) method() string {
 // VideoConfig contains information about a SendVideo request.
 type VideoConfig struct {
 	BaseFile
-	Duration  int
-	Caption   string
-	ParseMode string
+	Duration  int    `json:"duration,omitempty"`
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
 }
 
 // values returns a url.Values representation of VideoConfig.
@@ -515,9 +515,9 @@ func (config VideoConfig) method() string {
 // AnimationConfig contains information about a SendAnimation request.
 type AnimationConfig struct {
 	BaseFile
-	Duration  int
-	Caption   string
-	ParseMode string
+	Duration  int    `json:"duration,omitempty"`
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
 }
 
 // values returns a url.Values representation of AnimationConfig.
@@ -568,8 +568,8 @@ func (config AnimationConfig) method() string {
 // VideoNoteConfig contains information about a SendVideoNote request.
 type VideoNoteConfig struct {
 	BaseFile
-	Duration int
-	Length   int
+	Duration int `json:"duration,omitempty"`
+	Length   int `json:"length,omitempty"`
 }
 
 // values returns a url.Values representation of VideoNoteConfig.
@@ -619,9 +619,9 @@ func (config VideoNoteConfig) method() string {
 // VoiceConfig contains information about a SendVoice request.
 type VoiceConfig struct {
 	BaseFile
-	Caption   string
-	ParseMode string
-	Duration  int
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
+	Duration  int    `json:"duration,omitempty"`
 }
 
 // values returns a url.Values representation of VoiceConfig.
@@ -675,7 +675,7 @@ func (config VoiceConfig) method() string {
 // MediaGroupConfig contains information about a sendMediaGroup request.
 type MediaGroupConfig struct {
 	BaseChat
-	InputMedia []interface{}
+	InputMedia []interface{} `json:"media,omitempty"`
 }
 
 func (config MediaGroupConfig) values() (url.Values, error) {
@@ -701,8 +701,8 @@ func (config MediaGroupConfig) method() string {
 // LocationConfig contains information about a SendLocation request.
 type LocationConfig struct {
 	BaseChat
-	Latitude  float64 // required
-	Longitude float64 // required
+	Latitude  float64 `json:"latitude,omitempty"`  // required
+	Longitude float64 `json:"longitude,omitempty"` // required
 }
 
 // values returns a url.Values representation of LocationConfig.
@@ -726,11 +726,11 @@ func (config LocationConfig) method() string {
 // VenueConfig contains information about a SendVenue request.
 type VenueConfig struct {
 	BaseChat
-	Latitude     float64 // required
-	Longitude    float64 // required
-	Title        string  // required
-	Address      string  // required
-	FoursquareID string
+	Latitude     float64 `json:"latitude,omitempty"`  // required
+	Longitude    float64 `json:"longitude,omitempty"` // required
+	Title        string  `json:"title,omitempty"`     // required
+	Address      string  `json:"address,omitempty"`   // required
+	FoursquareID string  `json:"foursquare_id,omitempty"`
 }
 
 func (config VenueConfig) values() (url.Values, error) {
@@ -757,9 +757,9 @@ func (config VenueConfig) method() string {
 // ContactConfig allows you to send a contact.
 type ContactConfig struct {
 	BaseChat
-	PhoneNumber string
-	FirstName   string
-	LastName    string
+	PhoneNumber string `json:"phone_number,omitempty"`
+	FirstName   string `json:"first_name,omitempty"`
+	LastName    string `json:"last_name,omitempty"`
 }
 
 func (config ContactConfig) values() (url.Values, error) {
@@ -932,9 +932,9 @@ func (config ChatActionConfig) method() string {
 // EditMessageTextConfig allows you to modify the text in a message.
 type EditMessageTextConfig struct {
 	BaseEdit
-	Text                  string
-	ParseMode             string
-	DisableWebPagePreview bool
+	Text                  string `json:"test,omitempty"`
+	ParseMode             string `json:"parse_mode,omitempty"`
+	DisableWebPagePreview bool   `json:"disable_web_page_preview,omitempty"`
 }
 
 func (config EditMessageTextConfig) values() (url.Values, error) {
@@ -957,8 +957,8 @@ func (config EditMessageTextConfig) method() string {
 // EditMessageCaptionConfig allows you to modify the caption of a message.
 type EditMessageCaptionConfig struct {
 	BaseEdit
-	Caption   string
-	ParseMode string
+	Caption   string `json:"caption,omitempty"`
+	ParseMode string `json:"parse_mode,omitempty"`
 }
 
 func (config EditMessageCaptionConfig) values() (url.Values, error) {
